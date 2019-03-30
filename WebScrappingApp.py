@@ -319,11 +319,11 @@ def update(url, path):
                         new_a.append(player2Odds)
                         new_a.append(result)
 
-                        print(new_a,' needs to be appended')
-
-                        with open(mypath + alreadyFileExistsName, 'a', newline='') as csvfile:
-                            csvwriter = csv.writer(csvfile)
-                            csvwriter.writerow(new_a)
+                    #print(new_a)
+                    with open(mypath + alreadyFileExistsName, 'a') as csvfile:
+                        csvwriter = csv.writer(csvfile)
+                        csvwriter.writerow(new_a)
+                    new_a = []
 
                 # updating results and player odds
                 df = pd.read_csv(mypath + alreadyFileExistsName)
@@ -339,7 +339,7 @@ def update(url, path):
                     df.at[toBeUpdatedOddsOnly[i], "Player2 Odds"] = toBeUpdatedPlayer2OddsOnlyValues[i]
 
                 df.to_csv(mypath + alreadyFileExistsName, index=False, encoding='utf-8')
-                print('updating success')
+                print('updating success to {}'.format(mypath + alreadyFileExistsName))
 
     except Exception as e:
         messagebox.showinfo('Error', e)
