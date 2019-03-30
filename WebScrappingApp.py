@@ -321,15 +321,18 @@ def update(url, path):
 
                         print(new_a,' needs to be appended')
 
-                    with open(mypath + alreadyFileExistsName, 'a') as csvfile:
-                        csvwriter = csv.writer(csvfile)
-                        csvwriter.writerow(new_a)
+                        with open(mypath + alreadyFileExistsName, 'a', newline='') as csvfile:
+                            csvwriter = csv.writer(csvfile)
+                            csvwriter.writerow(new_a)
 
                 # updating results and player odds
                 df = pd.read_csv(mypath + alreadyFileExistsName)
                 # updating Results only
                 for i in range(len(toBeUpdateResultsOnly)):
                     df.at[toBeUpdateResultsOnly[i], "Result"] = toBeUpdateResultsOnlyValues[i]
+                    df.at[toBeUpdateResultsOnly[i], "Player1 Odds"] = None
+                    df.at[toBeUpdateResultsOnly[i], "Player2 Odds"] = None
+
 
                 for i in range(len(toBeUpdatedOddsOnly)):
                     df.at[toBeUpdatedOddsOnly[i], "Player1 Odds"] = toBeUpdatedPlayer1OddsOnlyValues[i]
