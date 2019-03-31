@@ -209,10 +209,10 @@ def newDataExtractor(url, fileNameHref, filePath):
           for data in finalDatas:
               if data[0] == 'Completed' or data[0] == 'completed':
                   data.append(data[2])
-                  data.insert(2, '-')
-                  data[3] = '-'
+                  data.insert(2, str('-'))
+                  data[3] = str('-')
               else:
-                  data.append('-')
+                  data.append(str('-'))
 
           # joining two lists (4 Features list, 2 Features List)
           countryAndHand = profileInfoExtractor(profileIds)
@@ -329,14 +329,16 @@ def update(url, path):
                 df = pd.read_csv(mypath + alreadyFileExistsName)
                 # updating Results only
                 for i in range(len(toBeUpdateResultsOnly)):
-                    df.at[toBeUpdateResultsOnly[i], "Result"] = toBeUpdateResultsOnlyValues[i]
+                    df['Result'] = df['Result'].astype(str)
+                    df.at[toBeUpdateResultsOnly[i], "Result"] = str(toBeUpdateResultsOnlyValues[i])
                     df.at[toBeUpdateResultsOnly[i], "Player1 Odds"] = None
                     df.at[toBeUpdateResultsOnly[i], "Player2 Odds"] = None
 
-
                 for i in range(len(toBeUpdatedOddsOnly)):
-                    df.at[toBeUpdatedOddsOnly[i], "Player1 Odds"] = toBeUpdatedPlayer1OddsOnlyValues[i]
-                    df.at[toBeUpdatedOddsOnly[i], "Player2 Odds"] = toBeUpdatedPlayer2OddsOnlyValues[i]
+                    df['Player1 Odds'] = df['Player1 Odds'].astype(str)
+                    df['Player2 Odds'] = df['Player2 Odds'].astype(str)
+                    df.at[toBeUpdatedOddsOnly[i], "Player1 Odds"] = str(toBeUpdatedPlayer1OddsOnlyValues[i])
+                    df.at[toBeUpdatedOddsOnly[i], "Player2 Odds"] = str(toBeUpdatedPlayer2OddsOnlyValues[i])
 
                 df.to_csv(mypath + alreadyFileExistsName, index=False, encoding='utf-8')
                 print('updating success to {}'.format(mypath + alreadyFileExistsName))
