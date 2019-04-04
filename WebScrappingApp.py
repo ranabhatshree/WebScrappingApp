@@ -330,9 +330,11 @@ def update(url, path):
                 # updating Results only
                 for i in range(len(toBeUpdateResultsOnly)):
                     df['Result'] = df['Result'].astype(str)
+                    df['Player1 Odds'] = df['Player1 Odds'].astype(str)
+                    df['Player2 Odds'] = df['Player2 Odds'].astype(str)
                     df.at[toBeUpdateResultsOnly[i], "Result"] = str(toBeUpdateResultsOnlyValues[i])
-                    df.at[toBeUpdateResultsOnly[i], "Player1 Odds"] = None
-                    df.at[toBeUpdateResultsOnly[i], "Player2 Odds"] = None
+                    df.at[toBeUpdateResultsOnly[i], "Player1 Odds"] = "-"
+                    df.at[toBeUpdateResultsOnly[i], "Player2 Odds"] = "-"
 
                 for i in range(len(toBeUpdatedOddsOnly)):
                     df['Player1 Odds'] = df['Player1 Odds'].astype(str)
